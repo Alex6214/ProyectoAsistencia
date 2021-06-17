@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="600" pageHeight="842" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c937a827-708b-41e9-bde5-ba6d8935bb98">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Fecha" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     TB_Ingreso."id_ingreso" AS id_ingreso,
+     TB_Ingreso."Dni_trab" AS Dni_trab,
+     TB_Ingreso."Nombres" AS Nombres,
+     TB_Ingreso."Apellidos" AS Apellidos,
+     TB_Ingreso."Hora_entrada" AS Hora_entrada,
+     TB_Ingreso."Dia" AS Dia,
+     TB_Ingreso."Hora_Ingreso" AS Hora_Ingreso,
+     TB_Ingreso."Empresa" AS Empresa
+FROM
+     "dbo"."TB_Ingreso" TB_Ingreso
+WHERE
+ Empresa = 'GRH' and Dia = $P{Fecha} ORDER BY Hora_Ingreso ASC]]>
+	</queryString>
+	<field name="id_ingreso" class="java.lang.Integer"/>
+	<field name="Dni_trab" class="java.lang.String"/>
+	<field name="Nombres" class="java.lang.String"/>
+	<field name="Apellidos" class="java.lang.String"/>
+	<field name="Hora_entrada" class="java.lang.String"/>
+	<field name="Dia" class="java.sql.Date"/>
+	<field name="Hora_Ingreso" class="java.sql.Time"/>
+	<field name="Empresa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="135" splitType="Stretch">
+			<staticText>
+				<reportElement x="48" y="60" width="424" height="33" uuid="bb09ba4b-b07c-42f1-b135-39e4d551486b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Leelawadee UI Semilight" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE ASISTENCIA]]></text>
+			</staticText>
+			<image>
+				<reportElement x="436" y="0" width="147" height="47" uuid="ee75dd5a-60f6-44d2-b9d6-3fe3e7f913c0"/>
+				<imageExpression><![CDATA["D:\\WEBSYSTEM\\PaginaWebRICHARD\\web\\img\\GRH.JPG"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="7" width="48" height="20" uuid="627d787c-ec3b-4f99-8a7a-131e152e5a7a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="48" y="7" width="40" height="20" uuid="a1a2600b-22f2-4074-9e5c-55fb9a5eea1e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="27" width="19" height="20" uuid="32366ecd-08b1-45a7-9b46-4aefd993ebda"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Dia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="29" y="27" width="72" height="14" uuid="296a8cea-c352-4c2e-98cc-8ce4b0ef97cb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="88" y="0" width="73" height="23" uuid="320a9bbf-3a43-48cf-a2fa-c6f10bb44741"/>
+				<textElement textAlignment="Center">
+					<font fontName="DaunPenh" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dni]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="0" width="73" height="23" uuid="c4129229-f6b6-4162-91e3-ebaea61538a1"/>
+				<textElement textAlignment="Center">
+					<font fontName="DaunPenh" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="96" height="23" uuid="36d7286d-1937-4f71-8519-a98536a2466c"/>
+				<textElement textAlignment="Center">
+					<font fontName="DaunPenh" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="68" height="23" uuid="462e8e3f-3ec6-43f0-8f94-d5072055124b"/>
+				<textElement textAlignment="Center">
+					<font fontName="DaunPenh" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="0" width="93" height="23" uuid="0ca8d6b1-2747-4c30-8d78-e5dd90670523"/>
+				<textElement textAlignment="Center">
+					<font fontName="DaunPenh" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ingreso Marcado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="502" y="0" width="35" height="23" uuid="b0f0fd61-d472-42c4-9500-d42bf8d82a13"/>
+				<textElement textAlignment="Center">
+					<font fontName="DaunPenh" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="43" width="68" height="20" uuid="a56d78df-cbc0-4260-ba7c-660d9b0b0cf7"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Dia}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="3" y="62" width="555" height="1" uuid="5945e2af-d087-4820-9253-c1d6fb5a11c4"/>
+			</line>
+			<staticText>
+				<reportElement x="88" y="42" width="73" height="20" uuid="16bdae3b-9acf-4994-993a-030bd6ecdd69"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[41471677]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="42" width="73" height="20" uuid="330cd6b8-f2b2-4a59-978c-b1c05bffdf58"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Gina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="42" width="96" height="20" uuid="f02af1c2-d111-4f20-9885-fa86289b3d28"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Encarnacion Ramirez]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="42" width="80" height="20" uuid="d39943d0-ed21-4ceb-9d39-9c6ed2e7253a"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[8:07 AM]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="88" y="0" width="73" height="20" uuid="45ff0163-e544-42bd-8160-01d0f6669064"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Dni_trab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="173" y="0" width="73" height="20" uuid="5c7b53be-d4a8-46b7-9f5f-b1f4a3484e55"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="96" height="20" uuid="da4859f3-be3c-4975-a344-4b6a4f131294"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Apellidos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="68" height="20" uuid="6898332d-dc34-492e-99eb-8956b6454add"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Dia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="379" y="0" width="80" height="20" uuid="cf263435-6c88-466d-be45-dd2043e17bd9"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Hora_Ingreso}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="23" width="560" height="1" uuid="e728fed0-b37f-4fde-aab8-0f0c493dbcfd"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

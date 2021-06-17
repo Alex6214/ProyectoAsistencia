@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc047bf5-e2d9-4522-94b0-9ce301ccc0c2">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<scriptlet name="scriptlet1" class="net.sf.jasperreports.engine.JRDefaultScriptlet"/>
+	<parameter name="de" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="hasta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     fa_cbfact."cdoc" AS Comprobante,
+     fa_cbfact."cdoc_serie" AS Serie,
+     fa_cbfact."cdoc_nro" AS Corelativo,
+     fa_cbfact."ccond_pago" AS Condicion_Pago,
+     fa_cbfact."ccod_coa" AS Cliente,
+     fa_cbfact."ccoa_dsc" AS Descripcion_Cliente,
+     fa_cbfact."ddoc_fch" AS Fecha_Emision,
+     fa_cbfact."nimp_t_mof" AS Total_Comprobante
+     
+FROM
+     "dbo"."fa_cbfact" fa_cbfact
+WHERE
+ccod_cia = 'RCR' and ddoc_fch between  $P{de} and $P{hasta} and cstatus = 'A' and ccond_pago between '03' and 'C90' order by ddoc_fch asc]]>
+	</queryString>
+	<field name="Comprobante" class="java.lang.String"/>
+	<field name="Serie" class="java.lang.String"/>
+	<field name="Corelativo" class="java.lang.String"/>
+	<field name="Condicion_Pago" class="java.lang.String"/>
+	<field name="Cliente" class="java.lang.String"/>
+	<field name="Descripcion_Cliente" class="java.lang.String"/>
+	<field name="Fecha_Emision" class="java.sql.Timestamp"/>
+	<field name="Total_Comprobante" class="java.math.BigDecimal"/>
+	<variable name="Total_Comprobante_1" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{Total_Comprobante}]]></variableExpression>
+	</variable>
+	<variable name="Total_Comprobante_2" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Total_Comprobante}]]></variableExpression>
+	</variable>
+	<variable name="Total_Comprobante_3" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Total_Comprobante}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="129" splitType="Stretch">
+			<image>
+				<reportElement x="647" y="0" width="144" height="71" uuid="4be0c871-4b25-4dfd-ac9c-f8ef87cb7282"/>
+				<imageExpression><![CDATA["D:\\WEBSYSTEM\\PaginaWebRICHARD\\web\\img\\richard.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="1" y="0" width="43" height="20" uuid="b0398cf2-406b-4e39-b5f2-118f2977fde0"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="44" y="0" width="22" height="20" uuid="e0bf7682-8d31-439b-8d5d-c64c95314393"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="331" y="82" width="53" height="20" uuid="bbe3bf16-1f64-4203-995a-aeb0972a43fb"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{de}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="417" y="82" width="54" height="20" uuid="b4a6264a-87f4-4973-807e-de843799bef5"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hasta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="384" y="82" width="31" height="20" uuid="1a66b46b-9d64-4a9f-b440-5b9289a004a7"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Hasta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="51" width="308" height="20" uuid="17369aea-f417-4186-89c6-5595b1f28b3a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Leelawadee UI Semilight" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE COMPROBANTES AL CREDITO]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="3" y="20" width="100" height="20" uuid="7ed8545c-7c0e-4f44-bdf3-bea298f3cda3"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="82" width="18" height="20" uuid="be1f53cc-059f-4ede-9977-98811b601885"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[De:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="22" y="0" width="81" height="20" uuid="35354988-1ca8-451b-866f-9a26a85116f2"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="0" width="45" height="20" uuid="5a3afe5d-0ff5-46dc-b88c-b3a9df27bd95"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="69" height="20" uuid="69bbae60-28fa-41b0-b5c7-89c407400139"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Corelativo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="0" width="62" height="20" uuid="f1694aa5-b194-423a-8de7-d6ed0db439ab"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Condicion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="0" width="80" height="20" uuid="bf4b39c1-61fe-4c1d-a9bf-09e9ee80115f"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="0" width="140" height="20" uuid="3e06a9bf-8f2a-446b-aa1e-d5e30b53cde4"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="605" y="0" width="99" height="20" uuid="cc76f39c-2ffa-41db-bbef-e84a16ed5560"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Emision]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="704" y="0" width="87" height="20" uuid="d3e8b9b7-7f71-434a-9b3b-adeaeeeea657"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="22" y="0" width="81" height="20" uuid="e8f9a952-3b68-4170-9795-76c7d6b0b68b"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Comprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="0" width="45" height="20" uuid="9e193426-38b9-4c4a-9dc9-a527caa28a5a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Serie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="69" height="20" uuid="9cc85809-793f-4979-9f1a-054f99708c2b"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Corelativo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="261" y="0" width="62" height="20" uuid="f3e9d54b-e49f-41c3-b942-7725c3c1f3dd"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Condicion_Pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="0" width="80" height="20" uuid="7fbb73c6-ec72-4502-a325-75bb8be60bdb"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Cliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="448" y="0" width="140" height="20" uuid="4493621a-1b81-4fd9-9107-7dbeba18d1ec"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion_Cliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="605" y="0" width="99" height="20" uuid="fd569d37-c7ac-4dcc-bb0c-037e714d72ef"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha_Emision}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="717" y="0" width="63" height="20" uuid="99afe05f-d373-4170-b067-0817c506050a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total_Comprobante}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="68" splitType="Stretch">
+			<line>
+				<reportElement x="5" y="0" width="797" height="1" uuid="d2716543-99e3-4e6c-93d1-0add2cdf042d"/>
+			</line>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="670" y="12" width="121" height="20" uuid="64ea054f-09f0-4bc6-ab5b-5da0ff624533"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{Total_Comprobante_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="633" y="12" width="37" height="20" uuid="fa7696ba-4772-476c-a757-cc63982d232e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="359" y="48" width="100" height="20" uuid="a7cf607c-f775-468e-a2f0-59fb5b291519"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>
